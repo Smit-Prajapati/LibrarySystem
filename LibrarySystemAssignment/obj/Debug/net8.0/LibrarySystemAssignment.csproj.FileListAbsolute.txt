@@ -1,0 +1,14 @@
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\bin\Debug\net8.0\LibrarySystemAssignment.exe
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\bin\Debug\net8.0\LibrarySystemAssignment.deps.json
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\bin\Debug\net8.0\LibrarySystemAssignment.runtimeconfig.json
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\bin\Debug\net8.0\LibrarySystemAssignment.dll
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\bin\Debug\net8.0\LibrarySystemAssignment.pdb
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\LibrarySystemAssignment.GeneratedMSBuildEditorConfig.editorconfig
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\LibrarySystemAssignment.AssemblyInfoInputs.cache
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\LibrarySystemAssignment.AssemblyInfo.cs
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\LibrarySystemAssignment.csproj.CoreCompileInputs.cache
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\LibrarySystemAssignment.dll
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\refint\LibrarySystemAssignment.dll
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\LibrarySystemAssignment.pdb
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\LibrarySystemAssignment.genruntimeconfig.cache
+D:\c#\YoutubeLearning1\LibrarySystemAssignment\obj\Debug\net8.0\ref\LibrarySystemAssignment.dll
