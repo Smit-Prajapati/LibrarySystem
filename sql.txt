@@ -1,0 +1,111 @@
+create database InsuranceDb;
+use InsuranceDb;
+
+
+-- Create Role table
+CREATE TABLE Role (
+    ID INT PRIMARY KEY IDENTITY,
+    RoleName NVARCHAR(50) UNIQUE
+);
+
+-- Create Users table
+CREATE TABLE Users (
+    ID INT PRIMARY KEY IDENTITY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    Password NVARCHAR(255) NOT NULL,
+    Email NVARCHAR(100) UNIQUE,
+    PhoneNumber NVARCHAR(20),
+    RoleId INT,
+    IsApprovedByAdmin INT DEFAULT 0, -- New column to track admin approval (0: Not approved, 1: Approved, -1: Rejected)
+    IsActive BIT,
+    FOREIGN KEY (RoleId) REFERENCES Role(ID)
+);
+
+
+-- Create Policies table
+CREATE TABLE Policies (
+    ID INT PRIMARY KEY IDENTITY,
+    PolicyNumber NVARCHAR(50) NOT NULL UNIQUE,
+    CoverageType NVARCHAR(100),
+    Duration INT,
+    Description NVARCHAR(MAX),
+    Installment DECIMAL(18,2),
+    PremiumAmount DECIMAL(18,2),
+    IsActive BIT
+);
+
+-- Create UserPolicy table
+CREATE TABLE UserPolicy (
+    ID INT PRIMARY KEY IDENTITY,
+    UserId INT,
+    PolicyId INT,
+    EnrollmentDate DATE,
+    EndDate DATE,
+    IsActive BIT,
+    FOREIGN KEY (UserId) REFERENCES Users(ID),
+    FOREIGN KEY (PolicyId) REFERENCES Policies(ID),
+    CONSTRAINT UC_UserPolicy UNIQUE (UserId, PolicyId)
+);
+
+-- Create Claims table
+CREATE TABLE Claims (
+    ID INT PRIMARY KEY IDENTITY,
+    PolicyId INT,
+    UserId INT,
+    IncidentDate DATE,
+    Description NVARCHAR(MAX),
+    Status NVARCHAR(50),
+    FOREIGN KEY (PolicyId) REFERENCES Policies(ID),
+    FOREIGN KEY (UserId) REFERENCES Users(ID)
+);
+
+-- Create AuditLogs table
+CREATE TABLE AuditLogs (
+    ID INT PRIMARY KEY IDENTITY,
+    UserId INT,
+    Timestamp DATETIME,
+    Action NVARCHAR(100) NOT NULL,
+    Details NVARCHAR(MAX),
+    IsSuccess BIT,
+    FOREIGN KEY (UserId) REFERENCES Users(ID)
+);
+
+-- Create ClaimHistory table
+CREATE TABLE ClaimHistory (
+    ID INT PRIMARY KEY IDENTITY,
+    ClaimId INT,
+    Action VARCHAR(50),
+    ActionDate DATETIME,
+    ActionBy INT,
+    FOREIGN KEY (ClaimId) REFERENCES Claims(ID),
+    FOREIGN KEY (ActionBy) REFERENCES Users(ID)
+);
+
+
+
+INSERT INTO Role (RoleName) VALUES ('Admin');
+INSERT INTO Role (RoleName) VALUES ('Agent');
+INSERT INTO Role (RoleName) VALUES ('User');
+
+-- Inserting an admin user
+INSERT INTO Users (FirstName, LastName, Username, Password, Email, PhoneNumber, RoleId, IsApprovedByAdmin, IsActive)
+VALUES ('Admin', 'User', 'admin', 'admin@123', 'admin0@gmail.com', '1234567890', 1, 1, 1);
+
+INSERT INTO Policies (PolicyNumber, CoverageType, Duration, Description, Installment, PremiumAmount, IsActive)
+VALUES 
+    ('POL001', 'Health Insurance', 365, 'Health insurance policy covering medical expenses', 100.00, 1200.00, 1),
+    ('POL002', 'Life Insurance', 730, 'Life insurance policy providing coverage for 2 years', 150.00, 3600.00, 1),
+	('POL005', 'Travel Insurance', 365, 'Travel insurance policy covering trip cancellations and medical emergencies', 50.00, 50.00, 0),
+    ('POL003', 'Car Insurance', 183, 'Car insurance policy covering damages and liabilities', 75.00, 450.00, 1),
+    ('POL004', 'Home Insurance', 1825, 'Home insurance policy protecting against property damage', 200.00, 7200.00, 1),
+    ('POL006', 'Pet Insurance', 365, 'Pet insurance policy covering veterinary expenses', 80.00, 960.00, 0)
+
+
+select * from Policies;
+select * from users;
+select * from userPolicy;
+
+--delete from Policies;
+--DBCC CHECKIDENT ('Policies', RESEED, 0);
